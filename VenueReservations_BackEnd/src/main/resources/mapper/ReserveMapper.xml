@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace:名称空间
+-->
+<mapper namespace="com.example.reservedassistance.mapper.ReserveMapper">
+<!--    <select id="getCarById" resultType="com.example.intelligentcommunity.entity.Car">-->
+<!--        select * from Car where carID = #{carid};-->
+<!--    </select>-->
+
+<!--    <insert id="addCar" parameterType="com.example.intelligentcommunity.entity.Car">-->
+<!--        insert into Car(carID,carBrand,carColor,carModel)-->
+<!--        values(#{dto.carID},#{dto.carBrand},#{dto.carColor},#{dto.carModel})-->
+<!--    </insert>-->
+
+
+    <select id="getReserveInf" resultType="com.example.reservedassistance.entity.Reserve">
+
+        select reserve.* from reserve, user_visitor, visitor
+        where reserve.reserve_status = '未开始'
+        and reserve.activityId = #{activityId}
+        and reserve.userVisitorId = user_visitor.id
+        and user_visitor.visitorId = visitor.id
+        and visitor.telephone = #{telephone}
+    </select>
+</mapper>

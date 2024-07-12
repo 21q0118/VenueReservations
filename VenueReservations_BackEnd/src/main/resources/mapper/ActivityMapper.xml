@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace:名称空间
+-->
+<mapper namespace="com.example.reservedassistance.mapper.ActivityMapper">
+<!--    <select id="getCarById" resultType="com.example.intelligentcommunity.entity.Car">-->
+<!--        select * from Car where carID = #{carid};-->
+<!--    </select>-->
+
+<!--    <insert id="addCar" parameterType="com.example.intelligentcommunity.entity.Car">-->
+<!--        insert into Car(carID,carBrand,carColor,carModel)-->
+<!--        values(#{dto.carID},#{dto.carBrand},#{dto.carColor},#{dto.carModel})-->
+<!--    </insert>-->
+
+
+    <select id="getScore" resultType="com.example.reservedassistance.db.ActivityScores">
+
+        SELECT activity.id, COALESCE(AVG(comment.score), 0.0) AS scores
+        FROM comment, activity
+        WHERE comment.activityId = activity.id
+        AND activity.is_cancel = 0
+        AND activity.stadiumId = #{stadiumId}
+        GROUP BY activity.id;
+    </select>
+</mapper>
